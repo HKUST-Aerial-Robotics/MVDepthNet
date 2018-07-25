@@ -1,7 +1,7 @@
 # MVDepthNet
 ## A Real-time Multiview Depth Estimation Network
 
-This is an open source implementation for 3DV 2018 submission "MVDepthNet: real-time multiview depth estimation neural network" by Kaixuan Wang and Shaojie Shen. [Arxiv link](https://arxiv.org/abs/1807.08563). If you find the project useful for your research, please cite:
+This is an open source implementation for 3DV 2018 submission "MVDepthNet: real-time multiview depth estimation neural network" by Kaixuan Wang and Shaojie Shen. [arXiv link](https://arxiv.org/abs/1807.08563). If you find the project useful for your research, please cite:
 
 ```
 @InProceedings{mvdepthnet,

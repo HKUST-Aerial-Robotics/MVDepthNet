@@ -10,7 +10,7 @@ from torch.autograd import Variable
 from torch import Tensor
 
 from depthNet_model import depthNet
-from opensource_visualize import *
+from visualize import *
 
 with open('sample_data.pkl', 'rb') as fp:
     sample_datas = pickle.load(fp)
