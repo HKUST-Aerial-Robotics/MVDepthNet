@@ -27,7 +27,7 @@ alt="video" width="320" height="180" border="10" /></a>
 ## 1.0 Prerequisites
 + **pytorch**
 
-The pytorch version used in the implementation is 0.3. To use the network in higher version, only small changes are needed.
+The pytorch version used in the implementation is 0.3. To use the network in higher versions, only small changes are needed.
 
 + **OpenCV**
 
@@ -56,4 +56,4 @@ Please refer to the ```example.py```. To use the network, you need to provide a 
 Please refer to ```depthNet_model.py```, use the function ```getVolume``` to construct multiple volumes and average them. Input the model with the reference image and the averaged cost volume to get the estimated depth maps.
 
 ## 5.0 Acknowledgement
-Most of the training data and test data are collected by [DeMoN](https://github.com/lmb-freiburg/demon) and we thank for their work.
+Most of the training data and test data are collected by [DeMoN](https://github.com/lmb-freiburg/demon) and we thank their work.
