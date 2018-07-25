@@ -15,7 +15,7 @@ This is an open source implementation for 3DV 2018 submission "MVDepthNet: real-
 
 Given multiple images and the corresponding camera poses, a cost volume is firstly calculated and then combined with the reference image to generate the depth map. An example is 
 
-<img src="fig/example.png" alt="MVDepthNet example" width = "320*4" height = "200">
+<img src="fig/example.png" alt="MVDepthNet example" width = "320*2" height = "100">
 
 From left to right is: the left image, the right image, the "ground truth" depth from RGB-D cameras and the estimated depth map.
 
