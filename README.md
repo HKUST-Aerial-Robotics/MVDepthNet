@@ -47,7 +47,7 @@ Just
 
 ## 4.0 Use your own data
 
-Please refer to the ```example.py```. To use the network, you need to provide a left image, a right image, camera intrinsic parameters and the reletive camera pose. Images are normalized using the mean ```81.0``` and the std ```35.0```, for example
+Please refer to the ```example.py```. To use the network, you need to provide a left image, a right image, camera intrinsic parameters and the relative camera pose. Images are normalized using the mean ```81.0``` and the std ```35.0```, for example
 
 ```normalized_image = (image - 81.0)/35.0```.
 
