@@ -31,7 +31,7 @@ The PyTorch version used in the implementation is 0.3. To use the network in hig
 
 + **OpenCV**
 
-+ **numpy**
++ **NumPy**
 
 ## 2.0 Download the model parameters and the samples
 

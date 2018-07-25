@@ -13,7 +13,6 @@ import numpy as np
 import time
 from numpy.linalg import inv
 
-
 def down_conv_layer(input_channels, output_channels, kernel_size):
     return nn.Sequential(
         nn.Conv2d(
@@ -35,7 +34,6 @@ def down_conv_layer(input_channels, output_channels, kernel_size):
    nn.BatchNorm2d(output_channels),
    nn.ReLU())
 
-
 def conv_layer(input_channels, output_channels, kernel_size):
     return nn.Sequential(
         nn.Conv2d(
@@ -47,11 +45,9 @@ def conv_layer(input_channels, output_channels, kernel_size):
   nn.BatchNorm2d(output_channels),
         nn.ReLU())
 
-
 def depth_layer(input_channels):
     return nn.Sequential(
         nn.Conv2d(input_channels, 1, 3, padding=1), nn.Sigmoid())
-
 
 def refine_layer(input_channels):
     return nn.Conv2d(input_channels, 1, 3, padding=1)
@@ -67,12 +63,6 @@ def up_conv_layer(input_channels, output_channels, kernel_size):
             bias=False),
   nn.BatchNorm2d(output_channels),
         nn.ReLU())
-
-def print_error(warp_uv, transform):
-    warp_np = warp_uv.cpu().data.numpy()
-    print(warp_np.shape)
-    print(transform.shape)
-    print(warp_np[np.where(warp_np != warp_np)])
 
 def get_trainable_number(variable):
     num = 1
@@ -206,7 +196,6 @@ class depthNet(nn.Module):
 
         upconv1 = self.upconv1(iconv2)
         iconv1 = self.iconv1(torch.cat((upconv1, udisp2), 1))
-        # print((iconv1 != iconv1).any())
         disp1 = 2.0 * self.disp1(iconv1)
 
         return [disp1, disp2, disp3, disp4]
