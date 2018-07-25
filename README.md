@@ -17,7 +17,7 @@ Given multiple images and the corresponding camera poses, a cost volume is first
 
 <img src="fig/example.png" alt="MVDepthNet example" width = "320*4" height = "200">
 
-From left to right is: left image, right image, "ground truth" depth from RGB-D cameras and the estimated depth map.
+From left to right is: the left image, the right image, the "ground truth" depth from RGB-D cameras and the estimated depth map.
 
 A video can be used to illustrate the performance of our system:
 
@@ -25,9 +25,9 @@ A video can be used to illustrate the performance of our system:
 alt="video" width="320" height="180" border="10" /></a>
 
 ## 1.0 Prerequisites
-+ **pytorch**
++ **PyTorch**
 
-The pytorch version used in the implementation is 0.3. To use the network in higher versions, only small changes are needed.
+The PyTorch version used in the implementation is 0.3. To use the network in higher versions, only small changes are needed.
 
 + **OpenCV**
 
