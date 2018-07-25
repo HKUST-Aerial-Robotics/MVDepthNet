@@ -75,5 +75,5 @@ for this_sample in sample_datas:
     result_image = np.concatenate(
         (np_left, np_right, np_gtdepth, np_depth), axis=1)
     cv2.imshow("result", result_image)
-    if cv2.waitKey(0) == 27:
+    if cv2.waitKey(1000) == 27:
         break
