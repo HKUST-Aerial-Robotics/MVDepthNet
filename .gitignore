@@ -1,0 +1,4 @@
+/.vscode
+*.pyc
+*.pth.tar
+*.pkl
