@@ -47,9 +47,13 @@ Just
 
 ## 4.0 Use your own data
 
-Please refer to the ```example.py```. To use the network, you need to provide a left image, a right image, camera intrinsic parameters and the relative camera pose. Images are normalized using the mean ```81.0``` and the std ```35.0```, for example
+To use the network, you need to provide a left image, a right image, camera intrinsic parameters and the relative camera pose. Images are normalized using the mean ```81.0``` and the std ```35.0```, for example
 
 ```normalized_image = (image - 81.0)/35.0```.
+
+We here provide the file ```example2.py``` to shown how to run the network using your own data. the ```left_pose``` and ```right_pose``` is the camera pose in the world frame. we show ```left_image```, ```right_image```, and the predicted depth in the final visualization window. A red dot in the ```left_image``` is used to test the relative pose accuracy. The red line in the ```right_image``` is the epiploar line that it much contains the red dot in the ```left_image```. Otherwise, the pose is not accurate. You can change the position of the tested point in line 56.
+
+To get good results, images should have enough translation and overlap between each other.
 
 ### 4.1 Use multiple images
 
