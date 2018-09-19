@@ -53,7 +53,7 @@ To use the network, you need to provide a left image, a right image, camera intr
 
 We here provide the file ```example2.py``` to shown how to run the network using your own data. the ```left_pose``` and ```right_pose``` is the camera pose in the world frame. we show ```left_image```, ```right_image```, and the predicted depth in the final visualization window. A red dot in the ```left_image``` is used to test the relative pose accuracy. The red line in the ```right_image``` is the epiploar line that it much contains the red dot in the ```left_image```. Otherwise, the pose is not accurate. You can change the position of the tested point in line 56.
 
-To get good results, images should have enough translation and overlap between each other.
+To get good results, images should have enough **translation** and overlap between each other. Rotation dose not help in the depth estimation.
 
 ### 4.1 Use multiple images
 
