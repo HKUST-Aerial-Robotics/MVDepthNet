@@ -27,13 +27,13 @@ pixel_coordinate = np.concatenate(
     (pixel_coordinate, np.ones([1, 320, 256])), axis=0)
 pixel_coordinate = np.reshape(pixel_coordinate, [3, -1])
 
+# HERE is what you should provide
 left_image = cv2.imread(
     "/home/wang/dataset/tum_rgbd/train/rgbd_dataset_freiburg1_xyz/rgb/1305031102.175304.png"
 )
 right_image = cv2.imread(
     "/home/wang/dataset/tum_rgbd/train/rgbd_dataset_freiburg1_xyz/rgb/1305031102.275326.png"
 )
-
 left_pose = np.asarray([
     [0.07543147, 0.61393189, -0.78574661, 1.3405],
     [0.9970987, -0.03837025, 0.06574118, 0.6266],
@@ -46,13 +46,12 @@ right_pose = np.asarray(
     [2.05541383e-04, -7.66586779e-01, -6.42140692e-01, 1.6196],
     [0, 0, 0, 1]])
 
-left2right = np.dot(inv(right_pose), left_pose)
-
 camera_k = np.asarray([ [525.0, 0, 319.5],
                         [0, 525.0, 239.5],
                         [0, 0, 1]])
 
 # test the epipolar line
+left2right = np.dot(inv(right_pose), left_pose)
 test_point = np.asarray([left_image.shape[1] / 2, left_image.shape[0] / 2, 1])
 far_point = np.dot(inv(camera_k), test_point) * 50.0
 far_point = np.append(far_point, 1)
