@@ -6,12 +6,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.init as init
 from torch.autograd import Variable
-from torch import Tensor
-import cv2
-import math
-import numpy as np
-import time
-from numpy.linalg import inv
 
 def down_conv_layer(input_channels, output_channels, kernel_size):
     return nn.Sequential(
@@ -19,7 +13,7 @@ def down_conv_layer(input_channels, output_channels, kernel_size):
             input_channels,
             output_channels,
             kernel_size,
-            padding=(kernel_size - 1) / 2,
+            padding=(kernel_size - 1) // 2,
             stride=1,
             bias=False),
    nn.BatchNorm2d(output_channels),
@@ -28,7 +22,7 @@ def down_conv_layer(input_channels, output_channels, kernel_size):
             output_channels,
             output_channels,
             kernel_size,
-            padding=(kernel_size - 1) / 2,
+            padding=(kernel_size - 1) // 2,
             stride=2,
             bias=False),
    nn.BatchNorm2d(output_channels),
@@ -40,7 +34,7 @@ def conv_layer(input_channels, output_channels, kernel_size):
             input_channels,
             output_channels,
             kernel_size,
-            padding=(kernel_size - 1) / 2,
+            padding=(kernel_size - 1) // 2,
             bias=False),
   nn.BatchNorm2d(output_channels),
         nn.ReLU())
@@ -54,12 +48,12 @@ def refine_layer(input_channels):
 
 def up_conv_layer(input_channels, output_channels, kernel_size):
     return nn.Sequential(
-        nn.Upsample(scale_factor=2, mode='bilinear'),
+        nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True),
         nn.Conv2d(
             input_channels,
             output_channels,
             kernel_size,
-            padding=(kernel_size - 1) / 2,
+            padding=(kernel_size - 1) // 2,
             bias=False),
   nn.BatchNorm2d(output_channels),
         nn.ReLU())
@@ -114,15 +108,15 @@ class depthNet(nn.Module):
         total_num = 0
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
-                init.kaiming_normal(m.weight, mode='fan_out')
+                init.kaiming_normal_(m.weight, mode='fan_out')
                 total_num += get_trainable_number(m.weight)
                 if m.bias is not None:
-                    init.constant(m.bias, 0)
+                    init.constant_(m.bias, 0)
                     total_num += get_trainable_number(m.bias)
             elif isinstance(m, nn.BatchNorm2d):
-                init.constant(m.weight, 1)
+                init.constant_(m.weight, 1)
                 total_num += get_trainable_number(m.weight)
-                init.constant(m.bias, 0)
+                init.constant_(m.bias, 0)
                 total_num += get_trainable_number(m.bias)
             elif isinstance(m, nn.Linear):
                 init.normal(m.weight, std=1e-3)
@@ -159,7 +153,7 @@ class depthNet(nn.Module):
 
             warp_uv = Variable(warp_uv.permute(
                 0, 3, 2, 1))  #shape = batch x height x width x 2
-            warped = F.grid_sample(right_image, warp_uv)
+            warped = F.grid_sample(right_image, warp_uv, align_corners=True)
 
             costvolume[:, depth_i, :, :] = torch.sum(
                 torch.abs(warped - left_image), dim=1)
@@ -182,17 +176,17 @@ class depthNet(nn.Module):
         upconv4 = self.upconv4(iconv5)
         iconv4 = self.iconv4(torch.cat((upconv4, conv3), 1))
         disp4 = 2.0 * self.disp4(iconv4)
-        udisp4 = F.upsample(disp4, scale_factor=2)
+        udisp4 = F.interpolate(disp4, scale_factor=2)
 
         upconv3 = self.upconv3(iconv4)
         iconv3 = self.iconv3(torch.cat((upconv3, conv2, udisp4), 1))
         disp3 = 2.0 * self.disp3(iconv3)
-        udisp3 = F.upsample(disp3, scale_factor=2)
+        udisp3 = F.interpolate(disp3, scale_factor=2)
 
         upconv2 = self.upconv2(iconv3)
         iconv2 = self.iconv2(torch.cat((upconv2, conv1, udisp3), 1))
         disp2 = 2.0 * self.disp2(iconv2)
-        udisp2 = F.upsample(disp2, scale_factor=2)
+        udisp2 = F.interpolate(disp2, scale_factor=2)
 
         upconv1 = self.upconv1(iconv2)
         iconv1 = self.iconv1(torch.cat((upconv1, udisp2), 1))

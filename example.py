@@ -13,7 +13,7 @@ from depthNet_model import depthNet
 from visualize import *
 
 with open('sample_data.pkl', 'rb') as fp:
-    sample_datas = pickle.load(fp)
+    sample_datas = pickle.load(fp, encoding='latin1')
 
 # model
 depthnet = depthNet()
@@ -35,14 +35,15 @@ cv2.moveWindow('result', 200, 200)
 for this_sample in sample_datas:
 
     # get data
-    depth_image_cuda = Tensor(this_sample['depth_image']).cuda()
-    depth_image_cuda = Variable(depth_image_cuda, volatile=True)
+    with torch.no_grad():
+        depth_image_cuda = Tensor(this_sample['depth_image']).cuda()
+        depth_image_cuda = Variable(depth_image_cuda)
 
-    left_image_cuda = Tensor(this_sample['left_image']).cuda()
-    left_image_cuda = Variable(left_image_cuda, volatile=True)
+        left_image_cuda = Tensor(this_sample['left_image']).cuda()
+        left_image_cuda = Variable(left_image_cuda)
 
-    right_image_cuda = Tensor(this_sample['right_image']).cuda()
-    right_image_cuda = Variable(right_image_cuda, volatile=True)
+        right_image_cuda = Tensor(this_sample['right_image']).cuda()
+        right_image_cuda = Variable(right_image_cuda)
 
     left_in_right_T = this_sample['left2right'][0:3, 3]
     left_in_right_R = this_sample['left2right'][0:3, 0:3]
