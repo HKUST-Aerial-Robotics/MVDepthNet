@@ -35,6 +35,8 @@ The PyTorch version used in the implementation is 0.3. To use the network in hig
 
 ## 2.0 Download the model parameters and the samples
 
+UPDATE: the dropbox link has failed because of the large traffic. This is the BaiduPan link: model weight: ```链接: https://pan.baidu.com/s/1CjV6iWBbjWOxGetf2ZXStQ 提取码: gbfg``` and sample data: 链接: https://pan.baidu.com/s/1feYfF6qSd7z7_anmR_rgnQ 提取码: g1fo```.
+
 We provide a trained model used in our paper evaluation and some images to run the example code.
 
 Please download the model via [the link](https://www.dropbox.com/s/o1n1w0chlrw4lqt/opensource_model.pth.tar?dl=0) and the sample images via [the link](https://www.dropbox.com/s/hr59f24byc3x8z3/sample_data.pkl.tar.gz?dl=0). Put the model ```opensource_model.pth.tar``` and extract the ```sample_data.pkl.tar.gz``` under the project folder.
